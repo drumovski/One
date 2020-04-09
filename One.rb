@@ -17,9 +17,15 @@ class Player
         @name = name
 		@type = type
         @difficulty = difficulty
-        @hand = []
+        @hand = Array.new
 		@@player_count += 1
     end
+
+    def take_a_card
+         @hand << $deck.pop
+    end
+
+
 
 
 
@@ -103,7 +109,7 @@ def create_players(num_human_players,num_computer_players)
     if num_human_players != 0     
         print "Please enter first players name: "
         name = gets.chomp
-        $player << Player.new(name, "human")
+        $player << Player.new(name, :human)
         (num_human_players-1).times do
             print "Please enter next players name: "
             name = gets.chomp
@@ -150,16 +156,7 @@ def player_info
         num_computer_players = num_computer_players.to_i
     end
     create_players(0,num_computer_players)
-
-    #DEBUGGING##############################
-    puts "player count: #{Player.player_count}"
-    puts "players to string #{$player.to_s}"
-    i = 0
-    Player.player_count.times do
-        puts "Player name is #{$player[i].name} and type is #{$player[i].type} and difficulty is #{$player[i].difficulty}"
-        i += 1
-    end  
-     #DEBUGGING##############################
+$number_of_players = num_computer_players + num_human_players 
 end
 
 
@@ -171,7 +168,14 @@ end
 # top_card_colour = colour from card chosen
 
 def deal_cards
-
+     #Deal 7 cards from the deck to each player
+     7.times do
+        i=0
+        $number_of_players.times do
+            $player[i].take_a_card
+            i += 1
+        end 
+     end
 end
 
 
@@ -184,6 +188,20 @@ $deck = Array.new
 create_deck
 
 player_info
+deal_cards
+#DEBUGGING##############################
+puts "player count: #{Player.player_count}"
+puts "players to string #{$player.to_s}"
+i = 0
+Player.player_count.times do
+    puts "Player name is #{$player[i].name} and type is #{$player[i].type} and difficulty is #{$player[i].difficulty}"
+    puts "Player name is #{$player[i].name} and the hand is #{$player[i].hand}"
+    i += 1
+end  
+puts
+puts $deck.length
+ #DEBUGGING##############################
+
 
 #make array turn_order [player_1, player_2, etc]
 
