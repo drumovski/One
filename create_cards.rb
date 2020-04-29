@@ -1,6 +1,9 @@
 #required by One.rb
 
 
+
+
+
 def create_colors_basic (color, colorize)
     #add a single "0" number to the color
     $deck.push({color: color, number: 0, colorize: colorize})

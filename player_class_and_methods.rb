@@ -33,6 +33,8 @@ class Player
         self
     end
 
+    #objects.sort_by {|obj| obj.attribute}
+
     def take_a_card(i)
         i.times do
          @hand << $deck.pop

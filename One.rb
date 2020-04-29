@@ -1,6 +1,7 @@
 # ONE - a cad game based on UNO
 
 require 'colorize'
+
 require_relative 'create_cards.rb'
 require_relative 'player_class_and_methods.rb'
 require_relative 'create_players.rb'
@@ -8,6 +9,8 @@ require_relative 'validations.rb'
 require_relative 'human_turn.rb'
 require_relative 'computer_turn.rb'
 require_relative 'turn.rb'
+
+
 
 
 # Display rules
@@ -19,7 +22,7 @@ def display_table(rounds)
         i = 1
         (Player.player_count - 1).times do
             if $player[i].hand.length == 1
-            print "#{$player[i].name} only has one card left!  "
+            print "#{$player[i].name} only has one card left!  ".colorize(:magenta)
             else
                 print "#{$player[i].name} has #{$player[i].hand.length} cards  "
             end
@@ -62,7 +65,7 @@ $reverse_played = false
 $match_card = Hash.new
 rounds = 1
 
-String.color_samples
+#String.color_samples
 #String.modes
 
 #Initialize play
