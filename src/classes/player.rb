@@ -32,6 +32,12 @@ class Player
 
       discard_pile.cards << @cards[i]
       @last_action = number
+      if number == "Pickup 2"
+        discard_pile.pickup_2_count += 2
+      end
+      if number == "Pickup 4"
+        discard_pile.pickup_4_count += 4
+      end
       @cards.delete_at(i)
       return true
     end
@@ -70,6 +76,15 @@ class Player
           return @cards[i] if @cards[i].color == color && @cards[i].number == number
         end
         false
+      end
+
+      def has_number?(number)
+        @cards.length.times do |i|
+          if @cards[i].number == number
+            return true
+          end
+        end
+        return false
       end
 end
 

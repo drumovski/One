@@ -3,27 +3,62 @@
 module Pickup2
     module_function
 
-    def pickup_2_played?
-        if player_array.last.last_action == "Pickup 2"
-            if pickup_2_in_hand?
+    def pickup_2_human(player_array, deck, discard_pile)
+        begin
+            puts "and you have a pickup 2."
+            puts "Choose pickup color (Y,B,R,G) or D (draw #{discard_pile.pickup_2_count} cards)"
+            option = gets.chomp.downcase
+            color = option[0]
+            number = "Pickup 2"
+            color = validate_color(color)
+            if color == "Draw"
+                draw_cards_pickup_2(player_array, deck, discard_pile)
+                puts " #{player_array[0].name} chooses to pick up #{discard_pile.pickup_2_count} cards"
+                return
+            end
+            validate_card_in_hand(color, number, player_array[0])
+        rescue InvalidColorError => e
+          puts e.message
+        retry  
+        rescue InvalidCardInHandError => e
+            puts e.message
+        retry
+        end
+        player_array[0].play_card(discard_pile, color, "Pickup 2")
+        return
+    end
+
+    def pickup_2_computer(player_array, deck, discard_pile)
+    end
+
+    def draw_cards_pickup_2(player_array, deck, discard_pile)
+        discard_pile.pickup_2_count.times do
+            player_array[0].cards << deck.take_card
+        end
+        puts "#{player_array[0].name} picked up #{discard_pile.pickup_2_count} cards"
+        discard_pile.pickup_2_count = 0
+    end
+
+    def pickup_2?(player_array, deck, discard_pile)
+        if player_array.last.last_action == "Pickup 2" #last round pickup 2 was played?
+            puts "A pickup 2 has been played"
+            player_array.last.last_action = "Pickup 2 actioned"
+            if player_array[0].has_number?("Pickup 2") #current player has a Pickup 2 in their hand?
                 if player_array[0].type == :computer
-                    computer_play_pickup_2
-                elsif player_array[0].type == :human
+                    pickup_2_computer(player_array, deck, discard_pile)
+                    return true
+                else 
+                    pickup_2_human(player_array, deck, discard_pile)
+                    return true
                 end
+            else
+                draw_cards_pickup_2(player_array, deck, discard_pile)
+                puts "Press enter to continue"
+                gets.chomp
+                return true
             end
         end
+        return false
     end
 
-    def pickup_2_in_hand?
-        player_array[0].cards.length.times do |i|
-        end
-
-
-    end
-
-    def human_play_pickup_2
-    end
-
-    def computer_play_pickup_2
-    end
 end

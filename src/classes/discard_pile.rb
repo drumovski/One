@@ -4,6 +4,8 @@
 
 class DiscardPile
   attr_accessor :cards
+  attr_accessor :pickup_2_count
+  attr_accessor :pickup_4_count
 
   def initialize
     @cards = []

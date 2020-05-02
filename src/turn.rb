@@ -20,7 +20,6 @@ module Turn
   end
 
   def display_cards_can_play(cards, match_card)
-  
     play_array = []
     cards.length.times do |i|
       if cards[i].number == match_card.number || cards[i].color == match_card.color || cards[i].color == 'Wild'
