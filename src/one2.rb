@@ -13,6 +13,7 @@ require_relative 'pre_turn'
 require_relative 'pickup_2'
 require_relative 'pickup_4'
 require_relative 'turn'
+require_relative 'computer_turn'
 require_relative 'end_turn'
 require_relative 'splash_screen'
 require_relative 'cmd_arguments'
@@ -40,9 +41,12 @@ while choice
     miss_turn = PreTurn.miss_turn_check(player_array, deck, discard_pile) # check if skip or reverse played
     PreTurn.clear_screen(player_array, miss_turn)
     unless miss_turn
-
       # Pickup 2 / pickup 4  Modules
-      player_array[0].display_table(player_array, match_card, deck, discard_pile)
+      if player_array[0].type == :human
+        player_array[0].display_table(player_array, match_card, deck, discard_pile)
+      else
+        player_array[0].display_table(player_array, match_card, deck, discard_pile)
+      end
       if !Pickup2::pickup_2?(player_array, deck, discard_pile)
         pickup_4_played_before = Pickup4::pickup_4_played_before(player_array)
         if pickup_4_played_before 
@@ -50,7 +54,7 @@ while choice
         else
 
           #Turn Module
-          played_card = Turn.play_card(player_array[0], match_card, deck, discard_pile)
+          played_card = Turn.check_can_play(player_array[0], match_card, deck, discard_pile)
         end
       end
     end

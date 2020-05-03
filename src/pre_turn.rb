@@ -16,18 +16,6 @@ module PreTurn
     'Reverse'
   end
 
-  # def pickup_2(player_array, deck)
-  #   player_array.last.last_action = 'Played a Pickup 2' # ensures last action doesn't trigger pickup 2 again next turn
-  #   player_array[0].cards << deck.take_card
-  #   "Pickup 2 has been played. #{player_array[0].name} has to pick up 2 cards"
-  # end
-
-  # def pickup_4(player_array, deck)
-  #   player_array.last.last_action = 'Played a Pickup 4' # ensures last action doesn't trigger pickup 4 again next turn
-  #   player_array[0].cards << deck.take_card
-  #   "Pickup 4 has been played. #{player_array[0].name} has to pick up 4 cards"
-  # end
-
   def clear_screen(player_array, miss_turn)
     system 'clear'
     if miss_turn != 'Reverse'
@@ -48,10 +36,6 @@ module PreTurn
       miss_turn = reverse(player_array)
     when 'Skip'
       miss_turn = skip(player_array)
-    # when 'Pickup 2'
-    #   miss_turn = Pickup2::pickup_2?(player_array, deck, discard_pile)
-    # when 'Pickup 4'
-    #   miss_turn = pickup_4(player_array, deck)
     end
     miss_turn
   end

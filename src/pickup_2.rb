@@ -28,7 +28,26 @@ module Pickup2
         return
     end
 
+    def pickup_2_computer_1(player_array, deck, discard_pile)
+        draw_cards_pickup_2(player_array, deck, discard_pile)
+    end
+
+    def pickup_2_computer_2(player_array, deck, discard_pile)
+        player_array[0].cards.length.times do |i|
+            if player_array[0].cards[i].number == "Pickup 2"
+                color = player_array[0].cards[i].color
+                break
+            end
+        end
+        player_array[0].play_card(discard_pile, color, "Pickup 2")
+    end
+
     def pickup_2_computer(player_array, deck, discard_pile)
+        if player_array[0].difficulty == 1
+            pickup_2_computer_1(player_array, deck, discard_pile)
+        else player_array[0].difficulty == 2 || player[0].difficulty == 3
+            pickup_2_computer_2(player_array, deck, discard_pile)
+        end
     end
 
     def draw_cards_pickup_2(player_array, deck, discard_pile)

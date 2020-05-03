@@ -28,7 +28,20 @@ module Pickup4
         return true
     end
 
+    def pickup_4_computer_1(player_array, deck, discard_pile)
+        draw_cards_pickup_4(player_array, deck, discard_pile)
+    end
+
+    def pickup_4_computer_2(player_array, deck, discard_pile)
+        player_array[0].play_card(discard_pile, "Wild", "Pickup 4")
+    end
+
     def pickup_4_computer(player_array, deck, discard_pile)
+        if player_array[0].difficulty == 1
+            pickup_4_computer_1(player_array, deck, discard_pile)
+        else player_array[0].difficulty == 2 || player[0].difficulty == 3
+            pickup_4_computer_2(player_array, deck, discard_pile)
+        end
     end
 
     def draw_cards_pickup_4(player_array, deck, discard_pile)

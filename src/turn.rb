@@ -6,7 +6,7 @@ module Turn
   module_function
 
   # When current player has no cards to play
-  def can_not_play(player, deck)
+  def human_can_not_play(player, deck)
     puts "#{player.name} has no possible cards to play"
     puts 'Press enter to pick up from deck'
     gets.chomp
@@ -14,13 +14,7 @@ module Turn
     return false
   end
 
-  def display_cards_can_play(cards, match_card)
-    play_array = []
-    cards.length.times do |i|
-      if cards[i].number == match_card.number || cards[i].color == match_card.color || cards[i].color == 'Wild'
-        play_array << cards[i]
-      end
-    end
+  def display_cards_can_play(cards, match_card, play_array)
     print 'You can play: '
     play_array.length.times do |i|
       print " |  #{play_array[i].color} #{play_array[i].number}  |".colorize(play_array[i].colorize)
@@ -65,22 +59,35 @@ module Turn
     chosen_card
   end
 
-  
-  
-
-  def play_card(player, match_card, deck, discard_pile)
-    can_play = player.can_play(match_card) #check to see if player has any cards they can play
-    if !can_play
-      return can_not_play(player, deck)
+  def check_can_play(player, match_card, deck, discard_pile)
+    play_array = player.cards_can_play(match_card) #check to see if player has any cards they can play
+    
+    #Human
+    if player.type == :human
+      if !play_array
+        return human_can_not_play(player, deck)
+      else
+        return human_play_card(player, match_card, deck, discard_pile, play_array)
+      end
     else
-      display_cards_can_play(player.cards, match_card)
+      #Computer    
+      if !play_array
+        ComputerTurn.computer_can_not_play(player, deck)
+        return false
+      else
+        return ComputerTurn.computer_play_card(player, match_card, deck, discard_pile, play_array)
+      end
+    end
+  end
+
+  def human_play_card(player, match_card, deck, discard_pile, play_array)
+      display_cards_can_play(player.cards, match_card, play_array)
       chosen_card = get_chosen_card(player, match_card, deck)
       if chosen_card != false # Player did not draw a card
         player.play_card(discard_pile, chosen_card.color, chosen_card.number) # current player plays a card
         return true
       else
         return false
-      end
-    end
+      end   
   end
 end
