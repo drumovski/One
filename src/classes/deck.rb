@@ -35,6 +35,10 @@ class Deck
     @cards
   end
 
+  def color_deck
+    @cards.map { |i| i.set_color}
+  end
+
   def fill_deck
     #create array of cards called deck
     create_colors_basic('Red')
@@ -47,8 +51,10 @@ class Deck
     create_colors_special('Green')
     create_wild_cards
     # create_custom_cards(:magenta) #may be implemented at a later stage
+    color_deck
     @cards
   end
+
 
   #swaps discard pile and deck
   def replace_deck(discard_pile)

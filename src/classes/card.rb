@@ -6,10 +6,17 @@ class Card
   attr_accessor :color
   attr_accessor :number
   attr_accessor :colorize
+  attr_accessor :score
 
   def initialize(color, number)
     @color = color
     @number = number
+    @colorize = :magenta
+    @score = 0
+    self
+  end
+
+  def set_color
     case @color
     when 'Red'
       @colorize = :light_red
@@ -22,6 +29,7 @@ class Card
     when 'Wild'
       @colorize = :magenta
     end
-    self
+    @colorize
   end
+
 end

@@ -33,8 +33,8 @@ class InvalidArgumentError < StandardError
 end
 
 
-def validate_number_of_players(num, max_num_players)
-  if num <= max_num_players && num > 0
+def validate_number_of_players(num, num_2, max_num_players)
+  if num <= max_num_players && num >= 0 && (num != 0 || num_2 != 0)
     true
   else
     raise InvalidNumberPlayersError, "#{num} is not a valid number".colorize(:black).colorize(background: :light_red)
@@ -49,14 +49,14 @@ def validate_name(name)
   end
   end
 
-# only for computer players
-# def validate_difficulty(difficulty)
-#     if (difficulty == "0" or difficulty.to_i != 0) and (difficulty.to_i <= 3)
-#         return true
-#     else
-#         raise InvalidDifficultyError, "#{difficulty} is not valid, must be 1, 2 or 3".colorize(:black ).colorize( :background => :light_red)
-#     end
-# end
+
+def validate_difficulty(difficulty)
+    if (difficulty == "0" or difficulty.to_i != 0) and (difficulty.to_i <= 3)
+        return true
+    else
+        raise InvalidDifficultyError, "#{difficulty} is not valid, must be 1, 2 or 3".colorize(:black ).colorize( :background => :light_red)
+    end
+end
 
 def validate_basic_color(color)
   case color

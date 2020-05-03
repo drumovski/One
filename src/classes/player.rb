@@ -6,7 +6,7 @@ class Player
   attr_reader :name
   attr_reader :type
   attr_accessor :last_action
-  attr_accessor :difficulty
+  attr_reader :difficulty
   attr_accessor :cards
 
   @@player_count = 0
@@ -120,5 +120,18 @@ class Human < Player
     puts
     puts '_______________________________________________________________________________________'
     puts
+  end
+end
+
+
+
+class Computer < Player
+
+  @@computer_names = ["Cerebro", "Duotronics", "HAL 9000", "C-3PO", "Deep Thought", "Mother", "Shirka", "Master Computer Program", "KITT", "WOPR", "Skynet", "ChiChi 3000", "Vector Sigma", "Vicki Smith-Lawson", "Ziggy", "Project 2501", "T-800", "Dell Latitude C840", "Dr. Know", "Spatial Operating Environment", "The Red Queen", "V.I.K.I", "Icarus", "GlaDOS", "JARVIS", "ARIIA", "Vi", "Gigolo Joe", "Johnny 5", "Robby the Robot", "Data", "Ash", "Gort", "Marvin", "Wall-E", "ED209", "Chappie", "Agent Smith", "Optimus Prime", "Roy Batty", "R2D2", "The Iron Giant", "T-1000", "Bomb 20", "Joshua", "GERTY", "V'ger", "The Borg", "Holly", "Ultron", "PipBoy 2000", "Sonny", "Teddy", "David", "Fembots", "Astro Boy", "Johnny Cab", "Vision", "Dot Matrix", "Ava", "TARS", "CASE", "The Stepford Wives", "Baymax", "The Gunslinger", "Maximillian", "EVE", "Pris", "Alex Murphy", "Bishop", "Motoko Kusanagi", "BB-8", "K-2SO"]
+  def initialize (difficulty)
+      @difficulty = difficulty
+      @name = @@computer_names.sample
+      @type = :computer
+      super @name, @type
   end
 end

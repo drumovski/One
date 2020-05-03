@@ -5,20 +5,6 @@
 module EndTurn
   module_function
 
-  def colorize_wild(color, match_card)
-    case color
-      when 'Red'
-        match_card.colorize = :light_red
-      when 'Blue'
-        match_card.colorize = :light_blue
-      when 'Yellow'
-        match_card.colorize = :light_yellow
-      when 'Green'
-        match_card.colorize = :light_green
-    end
-    return match_card
-  end
-
   def choose_wild_color(match_card)
     begin
       print 'Choose color for wild card (Y, B, R, G):'
@@ -30,7 +16,8 @@ module EndTurn
     end
     match_card.color = color
     match_card.number = 'Card'
-    match_card = colorize_wild(color, match_card)
+    match_card.colorize = match_card.set_color
+    return match_card
   end
 
   def check_winner(player)
