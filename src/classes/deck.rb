@@ -10,49 +10,49 @@ class Deck
     self
   end
 
-  def create_colors_basic(color, colorize)
+  def create_colors_basic(color)
     # add a single "0" number to the color
-    @cards << Card.new(color, 0, colorize)
+    @cards << Card.new(color, 0)
     i = 1
     9.times do
       # add two basic color cards to the deck numbered 1..9
-      2.times { @cards << Card.new(color, i, colorize) }
+      2.times { @cards << Card.new(color, i) }
       i += 1
     end
     @cards
   end
 
-  def create_colors_special(color, colorize)
-    2.times { @cards << Card.new(color, 'Skip', colorize) }
-    2.times { @cards << Card.new(color, 'Reverse', colorize) }
-    2.times { @cards << Card.new(color, 'Pickup 2', colorize) }
+  def create_colors_special(color)
+    2.times { @cards << Card.new(color, 'Skip') }
+    2.times { @cards << Card.new(color, 'Reverse') }
+    2.times { @cards << Card.new(color, 'Pickup 2') }
     @cards
   end
 
-  def create_wild_cards(colorize)
-    4.times { @cards << Card.new('Wild', 'Pickup 4', colorize) }
-    3.times { @cards << Card.new('Wild', 'Card', colorize) }
+  def create_wild_cards
+    4.times { @cards << Card.new('Wild', 'Pickup 4') }
+    3.times { @cards << Card.new('Wild', 'Card') }
     @cards
   end
 
   def fill_deck
-    # create array of cards called deck
-    create_colors_basic('Red', :light_red)
-    create_colors_basic('Blue', :light_blue)
-    create_colors_basic('Yellow', :light_yellow)
-    create_colors_basic('Green', :light_green)
-    create_colors_special('Blue', :light_blue)
-    create_colors_special('Red', :light_red)
-    create_colors_special('Yellow', :light_yellow)
-    create_colors_special('Green', :light_green)
-    create_wild_cards(:magenta)
+    #create array of cards called deck
+    create_colors_basic('Red')
+    create_colors_basic('Blue')
+    create_colors_basic('Yellow')
+    create_colors_basic('Green')
+    create_colors_special('Blue')
+    create_colors_special('Red')
+    create_colors_special('Yellow')
+    create_colors_special('Green')
+    create_wild_cards
     # create_custom_cards(:magenta) #may be implemented at a later stage
     @cards
   end
 
   #swaps discard pile and deck
   def replace_deck(discard_pile)
-    @cards = discard_pile.cards
+    @cards.concat(discard_pile.cards)
     @cards.shuffle!
     @cards
   end

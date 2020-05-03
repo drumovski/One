@@ -94,4 +94,31 @@ class Human < Player
     @type = :human
     super @name, @type
   end
+
+  # Displays the current human player their hand and other info about other players and deck cards remaining
+  def display_table(player_array, match_card, deck, discard_pile)
+    @cards = sort_cards
+    puts "------------#{@name}'s go------------".colorize(:green)
+    (player_array.length).times do |i|
+      if player_array[i].cards.length == 1
+        print "| #{player_array[i].name} only has one card left!  ".colorize(:black).colorize(background: :light_red)
+      else
+        print "| #{player_array[i].name} has #{player_array[i].cards.length} cards  "
+        end
+    end
+    puts "| #{deck.cards.length} cards left in deck "
+    #puts "| #{discard_pile.cards.length} cards in discard pile "
+    puts '_______________________________________________________________________________________'
+    puts  'Discard pile card to match is: '
+    print TTY::Box.frame(height: 7, width: 12, border: :thick, align: :center, padding: 1) {" #{match_card.color.colorize(match_card.colorize)} \n#{match_card.number.to_s.colorize(match_card.colorize)}"}.colorize(match_card.colorize)
+    puts
+    puts "#{@name}, your hand is: "
+    puts
+    @cards.length.times do |i|
+      print " | #{@cards[i].color} #{@cards[i].number} |".colorize(@cards[i].colorize)
+    end
+    puts
+    puts '_______________________________________________________________________________________'
+    puts
+  end
 end

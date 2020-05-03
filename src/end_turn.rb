@@ -5,6 +5,20 @@
 module EndTurn
   module_function
 
+  def colorize_wild(color, match_card)
+    case color
+      when 'Red'
+        match_card.colorize = :light_red
+      when 'Blue'
+        match_card.colorize = :light_blue
+      when 'Yellow'
+        match_card.colorize = :light_yellow
+      when 'Green'
+        match_card.colorize = :light_green
+    end
+    return match_card
+  end
+
   def choose_wild_color(match_card)
     begin
       print 'Choose color for wild card (Y, B, R, G):'
@@ -16,7 +30,7 @@ module EndTurn
     end
     match_card.color = color
     match_card.number = 'Card'
-    match_card
+    match_card = colorize_wild(color, match_card)
   end
 
   def check_winner(player)
@@ -39,7 +53,22 @@ module EndTurn
 
   #When deck runs out of cards
   def deck_swap(deck, discard_pile)
-    deck.cards = deck.replace_deck(discard_pile)
-    deck
+    if deck.cards.length < 16 # If deck runs out
+      discard_pile.cards.concat(deck.cards)
+      deck.cards.clear
+      deck.cards = deck.replace_deck(discard_pile)
+      discard_pile = discard_pile.reset_discard_pile(deck)
+    end
   end
+
+  def match_card(played_card, match_card, discard_pile)
+    if played_card
+      match_card = discard_pile.cards.last
+      if match_card.color == 'Wild'
+        match_card = choose_wild_color(match_card)
+      end
+    end
+    match_card
+  end
+
 end

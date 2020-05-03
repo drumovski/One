@@ -5,18 +5,13 @@
 module Turn
   module_function
 
-  def pick_up_card(player, deck)
-    player.cards << deck.take_card
-    player
-  end
-
   # When current player has no cards to play
   def can_not_play(player, deck)
     puts "#{player.name} has no possible cards to play"
     puts 'Press enter to pick up from deck'
     gets.chomp
-    pick_up_card(player, deck)
-    player
+    player.cards << deck.take_card
+    return false
   end
 
   def display_cards_can_play(cards, match_card)
@@ -48,7 +43,7 @@ module Turn
       color = validate_color(color)
       if color == 'Draw'
         puts "#{player.name} chooses to pick up a card"
-        pick_up_card(player, deck)
+        player.cards << deck.take_card
         return false
       end
       number = validate_number(number)
@@ -70,29 +65,22 @@ module Turn
     chosen_card
   end
 
-  # Displays the current human player their hand and other info about other players and deck cards remaining
-  def display_table(player_array, match_card, deck)
-    player_array[0].cards = player_array[0].sort_cards
-    puts "------------#{player_array[0].name}'s go------------".colorize(:green)
-    (Player.player_count - 1).times do |i|
-      if player_array[i + 1].cards.length == 1
-        print "| #{player_array[i + 1].name} only has one card left!  ".colorize(:black).colorize(background: :light_red)
+  
+  
+
+  def play_card(player, match_card, deck, discard_pile)
+    can_play = player.can_play(match_card) #check to see if player has any cards they can play
+    if !can_play
+      return can_not_play(player, deck)
+    else
+      display_cards_can_play(player.cards, match_card)
+      chosen_card = get_chosen_card(player, match_card, deck)
+      if chosen_card != false # Player did not draw a card
+        player.play_card(discard_pile, chosen_card.color, chosen_card.number) # current player plays a card
+        return true
       else
-        print "| #{player_array[i + 1].name} has #{player_array[i + 1].cards.length} cards  "
-        end
+        return false
+      end
     end
-    puts "| #{deck.cards.length} Cards left in deck "
-    puts '_______________________________________________________________________________________'
-    puts  'Discard pile card to match is: '
-    print TTY::Box.frame(height: 7, width: 12, border: :thick, align: :center, padding: 1) { " #{match_card.color.colorize(match_card.colorize)} \n#{match_card.number.to_s.colorize(match_card.colorize)}" } .colorize(match_card.colorize)
-    puts
-    puts "#{player_array[0].name}, your hand is: "
-    puts
-    player_array[0].cards.length.times do |i|
-      print " | #{player_array[0].cards[i].color} #{player_array[0].cards[i].number} |".colorize(player_array[0].cards[i].colorize)
-    end
-    puts
-    puts '_______________________________________________________________________________________'
-    puts
   end
 end

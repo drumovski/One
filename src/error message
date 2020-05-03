@@ -1,0 +1,11 @@
+| mm has 7 cards  Traceback (most recent call last):
+        3: from /home/jason/ruby/projects/One/src/one2.rb:48:in `<main>'
+        2: from /home/jason/ruby/projects/One/src/turn.rb:72:in `display_table'
+        1: from /home/jason/ruby/projects/One/src/turn.rb:72:in `times'
+/home/jason/ruby/projects/One/src/turn.rb:73:in `block in display_table': undefined method `cards' for nil:NilClass (NoMethodError)
+
+| jj has 7 cards  | mm has 7 cards  Traceback (most recent call last):
+        3: from /home/jason/ruby/projects/One/src/one2.rb:48:in `<main>'
+        2: from /home/jason/ruby/projects/One/src/turn.rb:72:in `display_table'
+        1: from /home/jason/ruby/projects/One/src/turn.rb:72:in `times'
+/home/jason/ruby/projects/One/src/turn.rb:73:in `block in display_table': undefined method `cards' for nil:NilClass (NoMethodError)

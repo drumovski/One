@@ -14,7 +14,7 @@ module Pickup4
             if color == "Draw"
                 draw_cards_pickup_4(player_array, deck, discard_pile)
                 puts " #{player_array[0].name} chooses to pick up #{discard_pile.pickup_4_count} cards"
-                return discard_pile.cards.last
+                return false
             end
             validate_card_in_hand(color, number, player_array[0])
         rescue InvalidColorError => e
@@ -25,7 +25,7 @@ module Pickup4
         retry
         end
         player_array[0].play_card(discard_pile, color, "Pickup 4")
-        return EndTurn.choose_wild_color(discard_pile.cards.last)
+        return true
     end
 
     def pickup_4_computer(player_array, deck, discard_pile)
@@ -39,23 +39,29 @@ module Pickup4
         discard_pile.pickup_4_count = 0
     end
 
-    def pickup_4?(player_array, deck, discard_pile)
-        if player_array.last.last_action == "Pickup 4" #last round pickup 4 was played?
-            puts "A pickup 4 has been played"
-            player_array.last.last_action = "Pickup 4 actioned"
-            if player_array[0].has_number?("Pickup 4") #current player has a Pickup 4 in their hand?
-                if player_array[0].type == :computer
-                    return pickup_4_computer(player_array, deck, discard_pile)
-                else 
-                    return pickup_4_human(player_array, deck, discard_pile)
-                end
-            else
-                draw_cards_pickup_4(player_array, deck, discard_pile)
-                puts "Press enter to continue"
-                gets.chomp
-                return discard_pile.cards.last
+    
+
+    def pickup_4_played(player_array, deck, discard_pile)
+        if player_array[0].has_number?("Pickup 4") #current player has a Pickup 4 in their hand?
+            if player_array[0].type == :computer
+                return pickup_4_computer(player_array, deck, discard_pile)
+            else 
+                return pickup_4_human(player_array, deck, discard_pile)
             end
+        else
+            draw_cards_pickup_4(player_array, deck, discard_pile)
+            puts "Press enter to continue"
+            gets.chomp
+            return false
         end
-        return false
     end
+
+        def pickup_4_played_before(player_array)
+            if player_array.last.last_action == "Pickup 4" #last round pickup 4 was played?
+                puts "A pickup 4 has been played"
+                player_array.last.last_action = "Pickup 4 actioned"
+                return true
+            end
+            return false
+        end
 end
