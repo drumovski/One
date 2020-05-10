@@ -58,7 +58,7 @@ module SplashScreen
   def splash_screen_choice
     choice = 2
     while choice == 2
-      system 'clear'
+      # system 'clear'
       puts ' _______  __    _  _______  '
       puts '|       ||  |  | ||       | '
       puts '|   _   ||   |_| ||    ___| '

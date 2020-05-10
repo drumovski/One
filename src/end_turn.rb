@@ -21,19 +21,19 @@ module EndTurn
   end
 
   def choose_wild_color_computer(match_card, player_array)
-    puts "now computer is choosing color"
+    # puts "now computer is choosing color"
     #chooses color the computer has the most of
     colors = player_array[0].color_count(player_array[0].cards)
-    puts "colors array is #{colors}"
+    # puts "colors array is #{colors}"
     keys = colors.keys
-    puts "keys is #{keys}"
+    # puts "keys is #{keys}"
     color = keys[0]
-    puts "color is #{color}"
+    # puts "color is #{color}"
     if player_array[1].cards.length == 1 && (player_array[1].last_action == "Card" || player_array[1].last_action == "Pick up 4") && match_card.color == color
       color = keys[1]
     end
     match_card.color = color
-    puts "computer chooses #{color}"
+    # puts "computer chooses #{color}"
     return match_card
   end
 
@@ -43,6 +43,9 @@ module EndTurn
       puts font.write("#{player.name}").colorize(:green)
       puts font.write("wins!").colorize(:green)
       puts font.write("Yay  for #{player.name}!").colorize(:green)
+      if player.type == :computer
+        puts "#{player.name} was difficulty #{player.difficulty}"
+      end
       puts 'press enter to return to the main screen'
       gets.chomp
       true

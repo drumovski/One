@@ -6,9 +6,9 @@ module ComputerTurn
     module_function
 
     def computer_can_not_play(player_array, deck)
-        puts "#{player_array[0].name} has no possible cards to play"
-        puts 'Press enter to pick up from deck'
-        gets.chomp
+        # puts "#{player_array[0].name} has no possible cards to play"
+        # puts 'Press enter to pick up from deck'
+        # gets.chomp
         player_array[0].cards << deck.take_card
         return false
     end
@@ -107,12 +107,12 @@ module ComputerTurn
         chosen_card = play_array[0]
         play_array.length.times do |i|
             play_array[i].score = card_score(player_array, play_array[i], play_array)
-            puts "score for #{play_array[i].color} #{play_array[i].number} is #{play_array[i].score}"
+            # puts "score for #{play_array[i].color} #{play_array[i].number} is #{play_array[i].score}"
             if chosen_card.score >  play_array[i].score
                 chosen_card = play_array[i]
             end
         end
-        puts "playing #{chosen_card.color} #{chosen_card.number}"
+        # puts "playing #{chosen_card.color} #{chosen_card.number}"
         chosen_card
     end
     
@@ -125,16 +125,16 @@ module ComputerTurn
         play_array.length.times do |i|
             play_array[i].score = card_score(player_array, play_array[i], play_array)
             if play_array[i].score == false
-                puts "#{player_array[0].name} chooses to pick up a card"
+                # puts "#{player_array[0].name} chooses to pick up a card"
                 player_array[0].cards << deck.take_card
                 return false
             end
-            puts "score for #{play_array[i].color} #{play_array[i].number} is #{play_array[i].score}"
+            # puts "score for #{play_array[i].color} #{play_array[i].number} is #{play_array[i].score}"
             if chosen_card.score <  play_array[i].score
                 chosen_card = play_array[i]
             end
         end
-        puts "playing #{chosen_card.color} #{chosen_card.number}"
+        # puts "playing #{chosen_card.color} #{chosen_card.number}"
         chosen_card
     end
 
@@ -145,7 +145,8 @@ module ComputerTurn
             chosen_card = computer_1(player_array, match_card, deck, play_array)
             
         when 2
-            chosen_card = computer_logic_display(match_card, deck, play_array)
+            # chosen_card = computer_logic_display(match_card, deck, play_array)
+            chosen_card = play_array.sample
         when 3
             chosen_card = computer_3(player_array, match_card, deck, play_array)
             
@@ -154,7 +155,7 @@ module ComputerTurn
     end
 
     def computer_play_card(player_array, match_card, deck, discard_pile, play_array)
-        display_cards_can_play(player_array[0].cards, match_card, play_array)
+        # display_cards_can_play(player_array[0].cards, match_card, play_array)
         chosen_card = get_chosen_card(player_array, match_card, deck, play_array)
         if chosen_card != false # Player did not draw a card
           player_array[0].play_card(discard_pile, chosen_card.color, chosen_card.number) # current player plays a card

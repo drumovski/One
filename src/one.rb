@@ -44,7 +44,7 @@ while choice
       if player_array[0].type == :human
         player_array[0].display_table(player_array, match_card, deck, discard_pile)
       else
-        player_array[0].display_table(player_array, match_card, deck, discard_pile)
+        # player_array[0].display_table(player_array, match_card, deck, discard_pile)
       end
       if !Pickup2::pickup_2?(player_array, deck, discard_pile)
         pickup_4_played_before = Pickup4::pickup_4_played_before(player_array)
