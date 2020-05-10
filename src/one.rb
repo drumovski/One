@@ -24,7 +24,6 @@ CmdArguments.validate_arg(first_arg, max)
 CmdArguments.help_argument(first_arg)
 choice = CmdArguments.choice_argument(first_arg)
 max_num_players = CmdArguments.max_players_argument(first_arg, max)
-
 ARGV.clear
 while choice
 
