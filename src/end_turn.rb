@@ -20,16 +20,16 @@ module EndTurn
     return match_card
   end
 
-  def choose_wild_color_computer(match_card, player)
+  def choose_wild_color_computer(match_card, player_array)
     puts "now computer is choosing color"
-    #chooses color the computer has the most of, making sure its different to the match_card.color
-    colors = player.color_count(player.cards)
+    #chooses color the computer has the most of
+    colors = player_array[0].color_count(player_array[0].cards)
     puts "colors array is #{colors}"
     keys = colors.keys
     puts "keys is #{keys}"
     color = keys[0]
     puts "color is #{color}"
-    if match_card.color == color
+    if player_array[1].cards.length == 1 && (player_array[1].last_action == "Card" || player_array[1].last_action == "Pick up 4") && match_card.color == color
       color = keys[1]
     end
     match_card.color = color
@@ -65,14 +65,14 @@ module EndTurn
     end
   end
 
-  def match_card(played_card, match_card, discard_pile, player)
+  def match_card(played_card, match_card, discard_pile, player_array)
     if played_card
       match_card = discard_pile.cards.last
       if match_card.color == 'Wild'
-        if player.type == :human
+        if player_array[0].type == :human
           match_card = choose_wild_color_human(match_card)
         else
-          match_card = choose_wild_color_computer(match_card, player)
+          match_card = choose_wild_color_computer(match_card, player_array)
         end
       end
     end

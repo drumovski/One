@@ -145,6 +145,7 @@ class Computer < Player
   def initialize (difficulty)
       @difficulty = difficulty
       @name = @@computer_names.sample
+      @@computer_names.delete(@name)
       @type = :computer
       super @name, @type
   end

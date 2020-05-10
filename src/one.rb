@@ -64,7 +64,7 @@ while choice
     if winner
       next
     end
-    match_card = EndTurn.match_card(played_card, match_card, discard_pile, player_array[0])
+    match_card = EndTurn.match_card(played_card, match_card, discard_pile, player_array)
     #put in computer wild change color function *make sure it changes color from match card!!
     player_array = EndTurn.next_player(player_array)
     EndTurn.deck_swap(deck, discard_pile)

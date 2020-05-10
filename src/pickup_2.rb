@@ -33,14 +33,14 @@ module Pickup2
     end
 
     def pickup_2_computer_2(player_array, deck, discard_pile)
-        player_array[0].cards.length.times do |i|
+        color = false
+        i = 0
+        until color do
             if player_array[0].cards[i].number == "Pickup 2"
-                puts "found pickup 2"
                 color = player_array[0].cards[i].color
-                puts "color of pickup2 is #{color}"
             end
+            i += 1
         end
-        puts "playing pickup2"
         player_array[0].play_card(discard_pile, color, "Pickup 2")
     end
 

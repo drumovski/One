@@ -95,7 +95,7 @@ module InitializeGame
 
   def deal_cards(player_array, deck)
     # Deal 7 cards from the deck to each player
-    7.times do
+    20.times do
       player_array.length.times do |i|
         player_array[i].cards << deck.take_card
         i += 1
