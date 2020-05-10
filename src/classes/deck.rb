@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# required by one2.rb
+# required by one.rb
 
 class Deck
   attr_accessor :cards

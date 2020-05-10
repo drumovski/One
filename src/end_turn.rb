@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-# required by one2.rb
+# required by one.rb
 
 module EndTurn
   module_function
 
-  def choose_wild_color(match_card)
+  def choose_wild_color_human(match_card)
     begin
       print 'Choose color for wild card (Y, B, R, G):'
       choice = gets.chomp.downcase
@@ -17,6 +17,23 @@ module EndTurn
     match_card.color = color
     match_card.number = 'Card'
     match_card.colorize = match_card.set_color
+    return match_card
+  end
+
+  def choose_wild_color_computer(match_card, player)
+    puts "now computer is choosing color"
+    #chooses color the computer has the most of, making sure its different to the match_card.color
+    colors = player.color_count(player.cards)
+    puts "colors array is #{colors}"
+    keys = colors.keys
+    puts "keys is #{keys}"
+    color = keys[0]
+    puts "color is #{color}"
+    if match_card.color == color
+      color = keys[1]
+    end
+    match_card.color = color
+    puts "computer chooses #{color}"
     return match_card
   end
 
@@ -48,11 +65,15 @@ module EndTurn
     end
   end
 
-  def match_card(played_card, match_card, discard_pile)
+  def match_card(played_card, match_card, discard_pile, player)
     if played_card
       match_card = discard_pile.cards.last
       if match_card.color == 'Wild'
-        match_card = choose_wild_color(match_card)
+        if player.type == :human
+          match_card = choose_wild_color_human(match_card)
+        else
+          match_card = choose_wild_color_computer(match_card, player)
+        end
       end
     end
     match_card

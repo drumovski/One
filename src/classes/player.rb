@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# required by one2.rb
+# required by one.rb
 
 class Player
   attr_reader :name
@@ -83,13 +83,21 @@ class Player
         false
       end
 
+      def has_color(color)
+        @cards.length.times do |i|
+          return @cards[i] if @cards[i].color == color
+        end
+        false
+      end
+
       def has_number?(number)
+        how_many_cards = 0
         @cards.length.times do |i|
           if @cards[i].number == number
-            return true
+            how_many_cards += 1
           end
         end
-        return false
+        return how_many_cards
       end
 end
 
@@ -167,4 +175,22 @@ class Computer < Player
       puts '_______________________________________________________________________________________'
       puts
     end
+
+    def color_count(arr)
+      colors = {"Yellow"=> 0, "Red"=> 0, "Green"=> 0, "Blue"=> 0}
+      arr.each do |i|
+        case i.color
+        when "Yellow"
+          colors["Yellow"] += 1
+        when "Red"
+          colors["Red"] += 1
+        when "Green"
+          colors["Green"] += 1
+        when "Blue"
+          colors["Blue"] += 1
+        end
+      end
+      colors = colors.sort_by{|k,v| -v}.to_h #sorts highest value first
+    end
+
 end

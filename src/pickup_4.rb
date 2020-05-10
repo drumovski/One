@@ -1,4 +1,4 @@
-#required by one2
+#required by one.rb
 
 module Pickup4
     module_function
@@ -39,7 +39,7 @@ module Pickup4
     def pickup_4_computer(player_array, deck, discard_pile)
         if player_array[0].difficulty == 1
             pickup_4_computer_1(player_array, deck, discard_pile)
-        else player_array[0].difficulty == 2 || player[0].difficulty == 3
+        else 
             pickup_4_computer_2(player_array, deck, discard_pile)
         end
     end
@@ -55,7 +55,7 @@ module Pickup4
     
 
     def pickup_4_played(player_array, deck, discard_pile)
-        if player_array[0].has_number?("Pickup 4") #current player has a Pickup 4 in their hand?
+        if player_array[0].has_number?("Pickup 4") != 0 #current player has a Pickup 4 in their hand?
             if player_array[0].type == :computer
                 return pickup_4_computer(player_array, deck, discard_pile)
             else 

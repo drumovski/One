@@ -1,4 +1,4 @@
-#required by one2
+#required by one
 
 module Pickup2
     module_function
@@ -35,17 +35,19 @@ module Pickup2
     def pickup_2_computer_2(player_array, deck, discard_pile)
         player_array[0].cards.length.times do |i|
             if player_array[0].cards[i].number == "Pickup 2"
+                puts "found pickup 2"
                 color = player_array[0].cards[i].color
-                break
+                puts "color of pickup2 is #{color}"
             end
         end
+        puts "playing pickup2"
         player_array[0].play_card(discard_pile, color, "Pickup 2")
     end
 
     def pickup_2_computer(player_array, deck, discard_pile)
         if player_array[0].difficulty == 1
             pickup_2_computer_1(player_array, deck, discard_pile)
-        else player_array[0].difficulty == 2 || player[0].difficulty == 3
+        else
             pickup_2_computer_2(player_array, deck, discard_pile)
         end
     end
@@ -62,7 +64,7 @@ module Pickup2
         if player_array.last.last_action == "Pickup 2" #last round pickup 2 was played?
             puts "A pickup 2 has been played"
             player_array.last.last_action = "Pickup 2 actioned"
-            if player_array[0].has_number?("Pickup 2") #current player has a Pickup 2 in their hand?
+            if player_array[0].has_number?("Pickup 2") != 0 #current player has a Pickup 2 in their hand?
                 if player_array[0].type == :computer
                     pickup_2_computer(player_array, deck, discard_pile)
                     return true

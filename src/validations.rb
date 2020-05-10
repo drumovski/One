@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# required by One.rb
+# required by one.rb
 
 class InvalidNumberPlayersError < StandardError
   end

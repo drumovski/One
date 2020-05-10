@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# required by one2.rb
+# required by one.rb
 
 module Turn
   module_function
@@ -59,23 +59,23 @@ module Turn
     chosen_card
   end
 
-  def check_can_play(player, match_card, deck, discard_pile)
-    play_array = player.cards_can_play(match_card) #check to see if player has any cards they can play
+  def check_can_play(player_array, match_card, deck, discard_pile)
+    play_array = player_array[0].cards_can_play(match_card) #check to see if player has any cards they can play
     
     #Human
-    if player.type == :human
+    if player_array[0].type == :human
       if !play_array
-        return human_can_not_play(player, deck)
+        return human_can_not_play(player_array[0], deck)
       else
-        return human_play_card(player, match_card, deck, discard_pile, play_array)
+        return human_play_card(player_array[0], match_card, deck, discard_pile, play_array)
       end
     else
       #Computer    
       if !play_array
-        ComputerTurn.computer_can_not_play(player, deck)
+        ComputerTurn.computer_can_not_play(player_array, deck)
         return false
       else
-        return ComputerTurn.computer_play_card(player, match_card, deck, discard_pile, play_array)
+        return ComputerTurn.computer_play_card(player_array, match_card, deck, discard_pile, play_array)
       end
     end
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# required by one2.rb
+# required by one.rb
 
 class DiscardPile
   attr_accessor :cards

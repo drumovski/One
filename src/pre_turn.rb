@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# required by one2.rb
+# required by one.rb
 
 module PreTurn
   module_function
@@ -17,7 +17,7 @@ module PreTurn
   end
 
   def clear_screen(player_array, miss_turn)
-    system 'clear'
+    #system 'clear'
     if miss_turn != 'Reverse'
       puts "Its now #{player_array[0].name}'s go, other players must avert their eyes!"
       puts miss_turn
@@ -26,7 +26,7 @@ module PreTurn
     end
     puts "#{player_array[0].name}, Please press enter when ready..."
     gets.chomp
-    system 'clear'
+    #system 'clear'
   end
 
   def miss_turn_check(player_array, deck, discard_pile)
