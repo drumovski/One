@@ -11,7 +11,7 @@ module Turn
     puts 'Press enter to pick up from deck'
     gets.chomp
     player.cards << deck.take_card
-    return false
+    return "drew a card"
   end
 
   def display_cards_can_play(cards, match_card, play_array)
@@ -36,7 +36,6 @@ module Turn
       number = option[1, 2].strip
       color = validate_color(color)
       if color == 'Draw'
-        puts "#{player.name} chooses to pick up a card"
         player.cards << deck.take_card
         return false
       end
@@ -73,7 +72,7 @@ module Turn
       #Computer    
       if !play_array
         ComputerTurn.computer_can_not_play(player_array, deck)
-        return false
+        return "drew a card"
       else
         return ComputerTurn.computer_play_card(player_array, match_card, deck, discard_pile, play_array)
       end
@@ -85,9 +84,9 @@ module Turn
       chosen_card = get_chosen_card(player, match_card, deck)
       if chosen_card != false # Player did not draw a card
         player.play_card(discard_pile, chosen_card.color, chosen_card.number) # current player plays a card
-        return true
+        return "played a #{chosen_card.color} #{chosen_card.number}"
       else
-        return false
+        return "drew a card"
       end   
   end
 end

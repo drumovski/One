@@ -22,13 +22,13 @@ module ComputerTurn
         puts '_______________________________________________________________________________________'
     end
 
-    def computer_logic_display(match_card, deck, play_array)
-        chosen_card = play_array.sample
-        puts "computer chose #{chosen_card.color} #{chosen_card.number} at random"
-        puts "press enter to continue"
-        gets
-        return chosen_card
-    end
+    # def computer_logic_display(match_card, deck, play_array)
+    #     chosen_card = play_array.sample
+    #     puts "computer chose #{chosen_card.color} #{chosen_card.number} at random"
+    #     puts "press enter to continue"
+    #     gets
+    #     return chosen_card
+    # end
 
     def number_different_colors(player, arr)
         colors = player.color_count(arr)
@@ -159,9 +159,9 @@ module ComputerTurn
         chosen_card = get_chosen_card(player_array, match_card, deck, play_array)
         if chosen_card != false # Player did not draw a card
           player_array[0].play_card(discard_pile, chosen_card.color, chosen_card.number) # current player plays a card
-          return true
+          return "played a #{chosen_card.color} #{chosen_card.number}"
         else
-          return false
+          return "drew a card"
         end
     
     end

@@ -69,7 +69,9 @@ module EndTurn
   end
 
   def match_card(played_card, match_card, discard_pile, player_array)
-    if played_card
+    if played_card.include? "drew" #didn't play a card
+      return match_card
+    else
       match_card = discard_pile.cards.last
       if match_card.color == 'Wild'
         if player_array[0].type == :human
@@ -79,7 +81,23 @@ module EndTurn
         end
       end
     end
-    match_card
+    return match_card
+  end
+
+  def clear_screen(player_array, played_card, miss_turn)
+     system 'clear'
+    if !miss_turn
+      puts "#{player_array[0].name} #{played_card}"
+      puts "Its now #{player_array[1].name}'s go"
+      puts "Please press enter when ready..."
+      gets.chomp
+    else
+      puts miss_turn
+      puts "Its now #{player_array[1].name}'s go"
+      puts "Please press enter when ready..."
+      gets.chomp
+    end
+     system 'clear'
   end
 
 end

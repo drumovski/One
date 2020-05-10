@@ -38,39 +38,30 @@ while choice
   # Pre Turn Module
   until winner
     miss_turn = PreTurn.miss_turn_check(player_array, deck, discard_pile) # check if skip or reverse played
-    PreTurn.clear_screen(player_array, miss_turn)
+    # PreTurn.clear_screen(player_array, miss_turn, match_card)
     unless miss_turn
-      # Pickup 2 / pickup 4  Modules
+        #display table
       if player_array[0].type == :human
         player_array[0].display_table(player_array, match_card, deck, discard_pile)
-      else
-        # player_array[0].display_table(player_array, match_card, deck, discard_pile)
       end
-      if !Pickup2::pickup_2?(player_array, deck, discard_pile)
-        pickup_4_played_before = Pickup4::pickup_4_played_before(player_array)
-        if pickup_4_played_before 
-          played_card = Pickup4::pickup_4_played(player_array, deck, discard_pile)
-        else
-
-          #Turn Module
-          played_card = Turn.check_can_play(player_array, match_card, deck, discard_pile)
-        end
+        # Pickup 2 / pickup 4  Modules
+      if Pickup2.pickup_2_played_before(player_array)
+        played_card = Pickup2.pickup_2_played(player_array, deck, discard_pile)
+      elsif Pickup4.pickup_4_played_before(player_array)
+        played_card = Pickup4.pickup_4_played(player_array, deck, discard_pile)
+      else
+        # Turn Module
+        played_card = Turn.check_can_play(player_array, match_card, deck, discard_pile)
       end
     end
-
     # End Turn Module
     winner = EndTurn.check_winner(player_array[0])
-    if winner
-      next
-    end
+    next if winner
     match_card = EndTurn.match_card(played_card, match_card, discard_pile, player_array)
-    #put in computer wild change color function *make sure it changes color from match card!!
+    EndTurn.clear_screen(player_array, played_card, miss_turn)
     player_array = EndTurn.next_player(player_array)
     EndTurn.deck_swap(deck, discard_pile)
-
-    
   end
   # return to main screen after winner determined
   choice = SplashScreen.splash_screen_choice
 end
-
