@@ -6,9 +6,6 @@ module ComputerTurn
     module_function
 
     def computer_can_not_play(player_array, deck)
-        # puts "#{player_array[0].name} has no possible cards to play"
-        # puts 'Press enter to pick up from deck'
-        # gets.chomp
         player_array[0].cards << deck.take_card
         return false
     end
@@ -22,14 +19,6 @@ module ComputerTurn
         puts '_______________________________________________________________________________________'
     end
 
-    # def computer_logic_display(match_card, deck, play_array)
-    #     chosen_card = play_array.sample
-    #     puts "computer chose #{chosen_card.color} #{chosen_card.number} at random"
-    #     puts "press enter to continue"
-    #     gets
-    #     return chosen_card
-    # end
-
     def number_different_colors(player, arr)
         colors = player.color_count(arr)
         num_diff_colors = 0
@@ -40,11 +29,6 @@ module ComputerTurn
         end
         num_diff_colors
     end
-
-    # def matching_number(number, player)
-    #     if player.has_number?(number) > 1
-    #         return player.has_number?(number)
-    # end
 
     def card_score(player_array, card, play_array)
         basic_score = 70
@@ -117,10 +101,6 @@ module ComputerTurn
     end
     
     def computer_3(player_array, match_card, deck, play_array)
-        #if Opponent played a wild 
-        # num_diff_colors = number_different_colors(player_array[0], player_array[0].cards)
-        # num_basic_colors_can_play = number_different_colors(player_array[0], play_array)
-        
         chosen_card = play_array[0]
         play_array.length.times do |i|
             play_array[i].score = card_score(player_array, play_array[i], play_array)

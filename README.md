@@ -27,7 +27,7 @@ As I am just starting on my coding journey, I thought this would be a good proje
 
 My target audience is primarily my son Marshall. Anyone who enjoys Uno can download and play the game though. 
 
-Given time to develop the program once it is submitted for the assignment, I'd like to include AI players and even test the validity of the AI's by getting them to play themselves. I'd also like to put a nice front end on it and have it as a good portfolio example. So potential target audience in future will also include people whom I'm trying to impress in the search for employment.
+Given time to develop the program once it is submitted for the assignment, I'd like to include AI players *(this is now done) and even test the validity of the AI's by getting them to play themselves. I'd like to put a nice front end on it and have it as a good portfolio example. So potential target audience in future will also include people whom I'm trying to impress in the search for employment.
 
 ##### How to use it
 
@@ -37,12 +37,12 @@ People will be able to use it by downloading the repository from GitHub. There w
 
 ##### Installation Instructions:
 
-1. Copy the One2 repository into a local directory from GitHub here: https://github.com/drumovski/One2. For instructions on downloading a repository, see here: https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository
-2. this is what you should end up with if running from the terminal: "git clone https://github.com/drumovski/One2.git"
+1. Copy the One repository into a local directory from GitHub here: https://github.com/drumovski/One. For instructions on downloading a repository, see here: https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository
+2. this is what you should end up with if running from the terminal: "git clone https://github.com/drumovski/One.git"
 3. Ruby Language must be installed. For help installing Ruby, see here: https://www.ruby-lang.org/en/downloads/
-4. In the terminal, navigate to the One2 directory "cd One2".
+4. In the terminal, navigate to the One directory "cd One".
 5. You may need to change the permissions of the one_install script. Do this by typing chmod u+x one_install && './one_install.sh' in the terminal. This only needs to be done once.
-6. When running the game in future, just type ./ruby one2.rb from the **src directory**. For a list of arguments, see below.
+6. When running the game in future, just type ./ruby one.rb from the **src directory**. For a list of arguments, see below.
 
 
 
@@ -60,7 +60,7 @@ Gems included in this program -
 
 ##### Arguments when starting game:
 
-eg. ruby ./one2.rb -mp 8
+eg. ruby ./one.rb -mp 8
 
 possible arguments:
 
