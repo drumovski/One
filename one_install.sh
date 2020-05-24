@@ -6,4 +6,4 @@ cd src
 gem install bundler
 bundle install
 echo "All gems have been installed, running application for the first time now"
-ruby ./one2.rb
+ruby ./one.rb

@@ -37,12 +37,13 @@ People will be able to use it by downloading the repository from GitHub. There w
 
 ##### Installation Instructions:
 
-1. Copy the One repository into a local directory from GitHub here: https://github.com/drumovski/One. For instructions on downloading a repository, see here: https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository
-2. this is what you should end up with if running from the terminal: "git clone https://github.com/drumovski/One.git"
-3. Ruby Language must be installed. For help installing Ruby, see here: https://www.ruby-lang.org/en/downloads/
-4. In the terminal, navigate to the One directory "cd One".
-5. You may need to change the permissions of the one_install script. Do this by typing chmod u+x one_install && './one_install.sh' in the terminal. This only needs to be done once.
-6. When running the game in future, just type ./ruby one.rb from the **src directory**. For a list of arguments, see below.
+1. This is a Ruby program and will only run from the terminal. Macs have the terminal built it. Windows users will need a terminal emulator.
+2. Copy the One repository into a local directory from GitHub here: https://github.com/drumovski/One. For instructions on downloading a repository, see here: https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository
+3. To copy repository from the terminal... $ git clone https://github.com/drumovski/One.git
+4. Ruby Language must be installed. For help installing Ruby, see here: https://www.ruby-lang.org/en/downloads/
+5. In the terminal, navigate to the One directory "cd One".
+6. You may need to change the permissions of the one_install script. Do this by typing chmod u+x one_install.sh && './one_install.sh' in the terminal. This only needs to be done once.
+7. When running the game in future, just type ./ruby one.rb from the **src directory**. For a list of arguments, see below.
 
 
 
